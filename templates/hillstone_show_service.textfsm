@@ -1,0 +1,12 @@
+Value Required,Filldown SERVICE_NAME (\S+)
+Value Required PROTOCOL (Any|TCP|UDP|ICMP|IPv6-ICMP|GRE|ESP|AH|IPv4|IPv6|OSPFIGP|IP)
+Value DST_PORT (\S+|-)
+Value SRC_PORT (\S+|-)
+Value TIMEOUT (-)
+
+Start
+  ^.*Name\s+Protocol\s+Dst-Port/Type.* -> Continue
+  ^\s*Total configured:.* -> Continue
+  ^\s*$$ -> Continue
+  ^\s+${PROTOCOL}\s+${DST_PORT}\s+${SRC_PORT}\s*${TIMEOUT}? -> Continue.Record
+  ^${SERVICE_NAME}\s+${PROTOCOL}\s+${DST_PORT}\s+${SRC_PORT}\s*${TIMEOUT}? -> Continue.Record
