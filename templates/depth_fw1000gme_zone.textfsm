@@ -1,0 +1,12 @@
+Value Required zone_name (\S+)
+Value priority (\d+)
+Value interface (\S+)
+Value action (deny|permit)
+Value description (\S+.*)
+
+Start
+  ^\s*security-zone\s+${zone_name}\s+priority\s+${priority} -> Record
+  ^\s*security-zone\s+${zone_name}\s+interface\s+${interface} -> Record
+  ^\s*security-zone\s+${zone_name}\s+inner-zone-action\s+${action} -> Record
+  ^\s*security-zone\s+${zone_name}\s+description\s+${description}$$ -> Record
+  ^\s*$$
