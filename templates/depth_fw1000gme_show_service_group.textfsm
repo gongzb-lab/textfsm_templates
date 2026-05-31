@@ -1,0 +1,11 @@
+Value Filldown group_name (.+)
+Value description (\S+.*)
+Value List service_object (.+)
+
+Start
+  ^\s*group_name -> Continue.Record
+  ^\s*group_name\s+:\s+${group_name}$$
+  ^\s*description\s+:\s+${description}
+  ^\s*service_name\s+:\s+${service_object}
+  ^\s+${service_object}
+  ^\s*$$
