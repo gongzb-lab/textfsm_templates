@@ -1,0 +1,9 @@
+Value RULE_ID (\S+)
+Value Required RULE_NAME (\S.*?)
+Value ACTION (Pass|Drop|Senior action)
+Value STATE (enable|disable)
+Value HITTED (\d+)
+
+Start
+  ^\s*${RULE_ID}\s+${RULE_NAME}\s*${ACTION}\s+${STATE}\s+${HITTED}\s*$$ -> Record
+  ^\s*RULE\s+ID\s+RULE\s+NAME\s+ACTION\s+STATE\s+HITTED -> Start
