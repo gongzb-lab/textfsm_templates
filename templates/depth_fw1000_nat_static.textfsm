@@ -1,0 +1,12 @@
+Value Required name (\S+)
+Value interface_name (\S+)
+Value global_ip (\d+\.\d+\.\d+\.\d+)
+Value local_ip (\d+\.\d+\.\d+\.\d+)
+Value vrrp_group (\S+)
+Value track_interface (\S+)
+
+Start
+  ^\s*nat static ${name} interface ${interface_name} global-ip ${global_ip} local-ip ${local_ip} -> Record
+  ^\s*nat static ${name} interface ${interface_name} global-address ${global_ip} local-address ${local_ip} -> Record
+  ^\s*nat static ${name} interface ${interface_name} global-address ${global_ip} local-address ${local_ip} track vrrp ${vrrp_group} interface ${track_interface} -> Record
+  ^\s*$$
