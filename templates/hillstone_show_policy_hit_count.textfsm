@@ -1,0 +1,17 @@
+Value NUM (\d+)
+Value ID (\S+)
+Value NAME (.+?)
+Value SRC_ZONE (\S+)
+Value DST_ZONE (\S+)
+Value SRC_ADDR (.+?)
+Value DST_ADDR (.+?)
+Value SERVICE (.+?)
+Value APPLICA (.+?)
+Value ACTION (.+?)
+Value HIT_COUNT (\d+)
+
+Start
+  ^==+ -> Next
+  ^--+ -> Next
+  ^\s*${NUM}\s+${ID}\s+${NAME}\s+${SRC_ZONE}\s+${DST_ZONE}\s+${SRC_ADDR}\s+${DST_ADDR}\s+${SERVICE}\s+${APPLICA}\s+${ACTION}\s+${HIT_COUNT} -> Record
+  ^\s*$$ -> Next
