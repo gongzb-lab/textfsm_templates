@@ -1,0 +1,24 @@
+Value Filldown VROUTER (\S+)
+Value TYPE (snatrule|dnatrule)
+Value Required ID (\d+)
+Value SRC_ZONE (\S+)
+Value DST_ZONE (\S+)
+Value SRC_IP (\S+)
+Value SRC_OBJ (\S+)
+Value DST_IP (\S+)
+Value DST_OBJ (\S+)
+Value SERVICE (\S+)
+Value IN_INF (\S+)
+Value EIF (\S+)
+Value TRANS_TO_OBJ (\S+)
+Value TRANS_TO_IP (\S+|eif-ip|eif-ipv6)
+Value MODE (\S+)
+Value STATUS (disable|enable)
+Value DESCRIPTION (\S.*?\S|\S)
+Value TIME (\S+)
+
+Start
+  ^ip\s+vrouter\s+"${VROUTER}"
+  ^\s*${TYPE}\s+id\s+${ID}(\s+ingress-interface\s+"${IN_INF}")?(\s+from-zone\s+"${SRC_ZONE}")?(\s+to-zone\s+"${DST_ZONE}")?\s+from\s+address-book\s+"${SRC_OBJ}"(\s+to\s+address-book\s+"${DST_OBJ}")?(\s+to\s+ip\s+${DST_IP})?(\s+service\s+"${SERVICE}")?(\s+eif\s+${EIF})?(\s+no-trans)?(\s+trans-to\s+address-book+\s+"${TRANS_TO_OBJ}")?(\s+trans-to(\s+ip+)?\s+${TRANS_TO_IP})?(\s+mode\s+${MODE})?(\s+${STATUS})?(\s+description\s+"${DESCRIPTION}")?(\s+schedule\s+"${TIME}")? -> Record
+  ^\s*${TYPE}\s+id\s+${ID}(\s+ingress-interface\s+"${IN_INF}")?(\s+from-zone\s+"${SRC_ZONE}")?(\s+to-zone\s+"${DST_ZONE}")?\s+from\s+ip\s+${SRC_IP}(\s+to\s+address-book\s+"${DST_OBJ}")?(\s+to\s+ip\s+${DST_IP})?(\s+service\s+"${SERVICE}")?(\s+eif\s+${EIF})?(\s+no-trans)?(\s+trans-to\s+address-book+\s+"${TRANS_TO_OBJ}")?(\s+trans-to(\s+ip+)?\s+${TRANS_TO_IP})?(\s+mode\s+${MODE})?(\s+${STATUS})?(\s+description\s+"${DESCRIPTION}")?(\s+schedule\s+"${TIME}")? -> Record
+  ^\s*${TYPE}\s+id\s+${ID}(\s+from-zone\s+"${SRC_ZONE}")?(\s+to-zone\s+"${DST_ZONE}")?\s+from\s+"${SRC_OBJ}"(\s+to\s+"${DST_OBJ}")?(\s+service\s+"${SERVICE}")?(\s+eif\s+${EIF})?(\s+no-trans)?(\s+trans-to\s+address-book\s+"${TRANS_TO_OBJ}")?(\s+trans-to\s+${TRANS_TO_IP})?(\s+mode\s+${MODE})?(\s+${STATUS})?(\s+description\s+"${DESCRIPTION}")?(\s+schedule\s+"${TIME}")? -> Record
