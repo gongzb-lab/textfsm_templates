@@ -1,0 +1,17 @@
+Value Required interface (\S+)
+Value ipv4 (\d+\.\d+\.\d+\.\d+/\d+)
+Value ipv6 ([0-9a-fA-F:]+/\d+|N/A)
+Value zone (\S+)
+Value vsys (\S+)
+Value status ((?:[UDK]\s+){3}[UDK])
+Value mac_addr (\S+)
+Value flag (N|S|E|V)
+Value description (\S.*\S|\S)
+
+Start
+  # 跳过表头、分隔线和空行
+  ^Interface\s+name.* -> Next
+  ^[-=]+.* -> Next
+  ^\s*$$ -> Next
+  ^${interface}\s+${ipv4}(\s+${ipv6})?\s+${zone}(\s+${vsys})?\s+${status}\s+${mac_addr}\s+${flag}\s+${description} -> Record
+  ^${interface}\s+${ipv4}(\s+${ipv6})?\s+${zone}(\s+${vsys})?\s+${status}\s+${mac_addr}\s+${description} -> Record
