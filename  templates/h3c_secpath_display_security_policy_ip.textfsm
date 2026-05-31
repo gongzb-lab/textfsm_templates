@@ -1,0 +1,49 @@
+Value Filldown RULE_ID (\d+)
+Value Filldown RULE_NAME (\S+)
+Value ACTION (pass|drop)
+Value STATUS (enable|disable)
+Value LOG_STATUS (enable|disable)
+Value COUNT_STATUS (enable|disable)
+Value VRF (\S+)
+Value TIME_RANGE (\S+(?:\s+\S+)*)
+Value DESCRIPTION (\S+(?:\s+\S+)*)
+Value SOURCE_ZONE (\S+)
+Value DESTINATION_ZONE (\S+)
+Value SOURCE_OBJECT (\S+(?:\s+\S+)*)
+Value DESTINATION_OBJECT (\S+(?:\s+\S+)*)
+Value SOURCE_IP_HOST (\S+)
+Value DESTINATION_IP_HOST (\S+)
+Value SOURCE_IP_SUBNET (\S+\s+\S+)
+Value DESTINATION_IP_SUBNET (\S+\s+\S+)
+Value SOURCE_IP_RANGE (\S+\s+\S+)
+Value DESTINATION_IP_RANGE (\S+\s+\S+)
+Value SERVICE_OBJECT (\S+(?:\s+\S+)*)
+Value SERVER_PROTOCOL (tcp|udp|icmp|icmpv6|\d+)
+Value SERVER_SOURCE_OPERATOR (eq|range|gt|lt)
+Value SERVER_SOURCE_PORT_RANGE ((\S+)(\s(\S+))?)
+Value SERVER_DESTINATION_OPERATOR (eq|range|gt|lt)
+Value SERVER_DESTINATION_PORT_RANGE ((\S+)(\s(\S+))?)
+
+Start
+  ^\s*rule\s+${RULE_ID}\s+name\s+${RULE_NAME} -> Record
+  ^\s+action\s+${ACTION}$$ -> Record 
+  ^\s+${STATUS}$$ -> Record
+  ^\s+logging\s+${LOG_STATUS}$$ -> Record
+  ^\s+counting\s+${COUNT_STATUS}$$ -> Record
+  ^\s+vrf\s+${VRF}$$ -> Record
+  ^\s+time-range\s+${TIME_RANGE}$$ -> Record
+  ^\s+description\s+${DESCRIPTION}$$ -> Record
+  ^\s+source-zone\s+${SOURCE_ZONE}$$ -> Record
+  ^\s+destination-zone\s+${DESTINATION_ZONE}$$ -> Record 
+  ^\s+source-ip\s+${SOURCE_OBJECT}$$ -> Record
+  ^\s+destination-ip\s+${DESTINATION_OBJECT}$$ -> Record
+  ^\s+source-ip-host\s+${SOURCE_IP_HOST}$$ -> Record
+  ^\s+destination-ip-host\s+${DESTINATION_IP_HOST}$$ -> Record
+  ^\s+source-ip-subnet\s+${SOURCE_IP_SUBNET}$$ -> Record
+  ^\s+destination-ip-subnet\s+${DESTINATION_IP_SUBNET}$$ -> Record
+  ^\s+source-ip-range\s+${SOURCE_IP_RANGE}$$ -> Record
+  ^\s+destination-ip-range\s+${DESTINATION_IP_RANGE}$$ -> Record
+  ^\s+service\s+${SERVICE_OBJECT}$$ -> Record
+  ^\s+service-port\s+${SERVER_PROTOCOL}(\s+source\s+${SERVER_SOURCE_OPERATOR}\s+${SERVER_SOURCE_PORT_RANGE})?(\s+destination\s+${SERVER_DESTINATION_OPERATOR}\s+${SERVER_DESTINATION_PORT_RANGE})?$$ -> Record
+
+EOF
