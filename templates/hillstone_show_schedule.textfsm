@@ -1,4 +1,4 @@
-Value Required NAME (\S+)
+Value Required NAME (.+?)
 Value STATUS (active|inactive)
 Value List TIME_TYPE (absolute|periodic)
 Value List PERIODIC_START (\d+:\d+:\d+|\d+:\d+)
@@ -11,5 +11,7 @@ Value DESCRIPTION (\S.*)
 Start
   ^schedule\s+name: -> Continue.Record
   ^schedule\s+name:\s+${NAME}\s+\(${STATUS}\)$$
-  ^\s*${TIME_TYPE}\s+start\s+${ABSOLUTE_START}(\s+end\s+${ABSOLUTE_END})?\s*$$
-  ^\s*${TIME_TYPE}\s+${PERIODIC_DAY}\s+${PERIODIC_START}\s+to\s+${PERIODIC_END}$$
+  ^\s*absolute\s+start\s+${ABSOLUTE_START}\s+end\s+${ABSOLUTE_END}\s*$$
+  ^\s*absolute\s+start\s+${ABSOLUTE_START}\s*$$
+  ^\s*absolute\s+end\s+${ABSOLUTE_END}\s*$$
+  ^\s*periodic\s+${PERIODIC_DAY}\s+${PERIODIC_START}\s+to\s+${PERIODIC_END}$$
