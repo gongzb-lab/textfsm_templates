@@ -1,0 +1,18 @@
+Value Filldown,Required NAME (\S.*?)
+Value Filldown,Required ID (\d+)
+Value Filldown REFERENCE_COUNT (\d+)
+Value Filldown MODE (\S+)
+Value Filldown STATUS (\S+)
+Value Filldown ROUTE_ENABLE (enable)
+Value List SECTION_ID (\d+)
+Value List START_ADDR (\S+)
+Value List END_ADDR (\S+)
+
+Start
+  ^nat\s+address-group -> Continue.Record
+  ^nat\s+address-group\s+${NAME}\s+${ID}\s*$$
+  ^\s*reference count:\s+${REFERENCE_COUNT}\s*$$
+  ^\s*mode\s+${MODE}\s*$$
+  ^\s*status\s+${STATUS}\s*$$
+  ^\s*route\s+${ROUTE_ENABLE}\s*$$
+  ^\s*section\s+${SECTION_ID}\s+${START_ADDR}\s+${END_ADDR}\s*$$

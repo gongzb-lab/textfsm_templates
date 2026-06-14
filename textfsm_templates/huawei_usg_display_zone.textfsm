@@ -1,0 +1,15 @@
+Value ZONE_NAME (\S+)
+Value DESCRIPTION (\S.*?)
+Value Required PRIORITY (\d+)
+Value List INTERFACE ([A-Za-z-]+\s*\d+(?:\/\d+)*(?:\.\d+)?)
+Value VRF (\S+)
+
+Start
+  ^# -> Continue.Record
+  ^${ZONE_NAME}$$
+  ^\s*vpn-instance\s+${VRF}\s+${ZONE_NAME}$$
+  ^\s*description\s+${DESCRIPTION}$$
+  ^\s*priority\s+is\s+${PRIORITY}$$
+  ^\s*interface\s+of\s+the\s+zone\s+is\s+\((\d+)\):\s*$$
+  ^\s+${INTERFACE}$$
+  ^\s*$$

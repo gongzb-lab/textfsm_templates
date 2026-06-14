@@ -1,9 +1,0 @@
-Value ZONE_NAME (\S+)
-Value List INTERFACE (\S+)
-
-Start
-  ^Name: -> Continue.Record
-  ^Name:\s+${ZONE_NAME}$$
-  ^Members:\s+$$
-  ^\s+${INTERFACE}$$
-  ^\s*$$

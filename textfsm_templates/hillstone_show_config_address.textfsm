@@ -1,0 +1,17 @@
+Value Filldown NAME (.+?)
+Value List IP (\d+\.\d+\.\d+\.\d+/\d+|[0-9a-fA-F:]+/\d+)
+Value List RANGE ((\d+\.\d+\.\d+\.\d+)\s+(\d+\.\d+\.\d+\.\d+))
+Value List WILDCARD ((\d+\.\d+\.\d+\.\d+)\s+(\d+\.\d+\.\d+\.\d+))
+Value List HOST ("[^"]+"|\S+)
+Value List MEMBER ("[^"]*"|\S+)
+Value DESCRIPTION ("[^"]+"|\S+)
+
+Start
+  ^address -> Continue.Record
+  ^address\s+"${NAME}".*$$
+  ^\s+ip\s+${IP}$$
+  ^\s+range\s+${RANGE}$$
+  ^\s+host\s+"${HOST}"$$
+  ^\s+wildcard\s+${WILDCARD}$$
+  ^\s+member\s+"${MEMBER}"$$
+  ^\s+description\s+"${DESCRIPTION}"$$

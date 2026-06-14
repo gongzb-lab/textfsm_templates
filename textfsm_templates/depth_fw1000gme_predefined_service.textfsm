@@ -1,0 +1,12 @@
+Value Required name (\S+)
+Value protocol (\d+)
+Value src_start (\d+)
+Value src_end (\d+)
+Value dst_start (\d+)
+Value dst_end (\d+)
+
+Start
+  ^\s*name\s+protocol\s+sport_start/type\s+sport_end/code\s+dport_start\s+dport_end.* -> Predefined
+
+Predefined
+  ^\s*${name}\s+${protocol}\s+${src_start}\s+${src_end}\s+${dst_start}\s+${dst_end} -> Record

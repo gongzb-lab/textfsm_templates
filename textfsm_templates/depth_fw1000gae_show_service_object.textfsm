@@ -1,0 +1,22 @@
+Value Filldown name (\S+.*)
+Value description (\S+.*)
+Value protocol (\S+)
+Value sport_start (\S+)
+Value sport_end (\S+)
+Value dport_start (\S+)
+Value dport_end (\S+)
+Value type (\S+)
+Value code (\S+)
+
+Start
+  ^\s*name -> Continue.Record
+  ^\s*name\s+:\s+${name}$$
+  ^\s*protocol\s+:\s+${protocol}
+  ^\s*sport_start\s+:\s+${sport_start}
+  ^\s*sport_end\s+:\s+${sport_end}
+  ^\s*dport_start\s+:\s+${dport_start}
+  ^\s*dport_end\s+:\s+${dport_end}  
+  ^\s*type\s+:\s+${type}
+  ^\s*code\s+:\s+${code}  
+  ^\s*description\s+:\s+${description}
+  ^\s*$$

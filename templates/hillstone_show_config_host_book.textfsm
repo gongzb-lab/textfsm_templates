@@ -1,9 +1,0 @@
-Value Filldown NAME ("[^"]+"|\S+)
-Value DESCRIPTION (.*?)
-Value List HOSTS (.*)
-
-Start
-  ^host-book -> Continue.Record
-  ^host-book ${NAME}$$
-  ^\s+description ${DESCRIPTION}
-  ^\s+host ${HOSTS}$$

@@ -1,8 +1,0 @@
-Value RULE_ID (\d+)
-Value RULE_NAME (\S.*?)
-Value STATUS (enable|disable)
-Value ACTION (permit|deny|-)
-Value HIT_COUNT (\d+)
-
-Start
-  ^\s*${RULE_ID}\s+${RULE_NAME}\s+${STATUS}\s+${ACTION}\s+${HIT_COUNT}\s*$$ -> Record

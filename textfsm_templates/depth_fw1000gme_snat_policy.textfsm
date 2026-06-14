@@ -1,0 +1,23 @@
+Value Required policy_name (\S+)
+Value policy_status (disable|enable)
+Value src_obj (\S+)
+Value src_grp (\S+)
+Value dst_obj (\S+)
+Value dst_grp (\S+)
+Value action (.*)
+Value port (.*)
+Value srv_obj (.*)
+Value srv_grp (.*)
+Value interface (\S+)
+
+Start
+  ^\s*nat source-nat\s+${policy_name}\s+src-address\s+address-group\s+?${src_grp} -> Record
+  ^\s*nat source-nat\s+${policy_name}\s+src-address\s+(address-object\s+)?${src_obj} -> Record
+  ^\s*nat source-nat\s+${policy_name}\s+dst-address\s+address-group\s+${dst_obj} -> Record
+  ^\s*nat source-nat\s+${policy_name}\s+dst-address\s+(address-object\s+)?${dst_obj} -> Record
+  ^\s*nat source-nat\s+${policy_name}\s+service\s+service-group\s+${srv_grp} -> Record  
+  ^\s*nat source-nat\s+${policy_name}\s+service\s+(service-object\s+)?${srv_obj} -> Record
+  ^\s*nat source-nat\s+${policy_name}\s+action\s+${action} -> Record
+  ^\s*nat source-nat\s+${policy_name}\s+port\s+${port} -> Record
+  ^\s*nat source-nat\s+${policy_name}\s+state\s+${policy_status} -> Record
+  ^\s*nat source-nat\s+${policy_name}\s+interface\s+${interface} -> Record

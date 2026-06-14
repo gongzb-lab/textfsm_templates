@@ -1,9 +1,0 @@
-Value Required group_name (\S+.*)
-Value List address_object (\S+.*)
-Value description (\S+.*)
-
-Start
-  ^ipv4 address-group\s+${group_name}\s+address-object\s+${address_object}$$ -> Record
-  ^ipv4 address-group\s+${group_name}\s+description\s+${description}$$ -> Record
-  ^address-group\s+${group_name}\s+address-object\s+${address_object}$$ -> Record
-  ^address-group\s+${group_name}\s+description\s+${description}$$ -> Record

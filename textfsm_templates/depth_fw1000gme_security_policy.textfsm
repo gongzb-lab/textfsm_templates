@@ -1,0 +1,43 @@
+Value Required name (\S+)
+Value src_zone (\S+)
+Value dst_zone (\S+)
+Value src_address (\S+)
+Value dst_address (\S+)
+Value src_addr_obj (\S+.*)
+Value dst_addr_obj (\S+.*)
+Value src_addr_grp (\S+.*)
+Value dst_addr_grp (\S+.*)
+Value action (\S+.*)
+Value service_protocol (\S+)
+Value service_protocol_name (\S+)
+Value time_obj (\S+)
+Value state (enable|disable)
+Value description (\S+.*)
+
+Start
+  ^security-policy\s+${name}\s+src-zone\s+${src_zone}\s+dst-zone\s+${dst_zone}\s+src-address\s+address-object\s+${src_addr_obj}$$ -> Record
+  ^security-policy\s+${name}\s+src-zone\s+${src_zone}\s+dst-zone\s+${dst_zone}\s+dst-address\s+address-object\s+${dst_addr_obj}$$ -> Record
+  ^security-policy\s+${name}\s+src-zone\s+${src_zone}\s+dst-zone\s+${dst_zone}\s+src-address\s+address-group\s+${src_addr_grp}$$ -> Record
+  ^security-policy\s+${name}\s+src-zone\s+${src_zone}\s+dst-zone\s+${dst_zone}\s+dst-address\s+address-group\s+${dst_addr_grp}$$ -> Record  
+  ^security-policy\s+${name}\s+src-zone\s+${src_zone}\s+dst-zone\s+${dst_zone}\s+time-object\s+${time_obj} -> Record
+  ^security-policy\s+${name}\s+src-zone\s+${src_zone}\s+dst-zone\s+${dst_zone}\s+action\s+${action} -> Record
+  ^security-policy\s+${name}\s+src-zone\s+${src_zone}\s+dst-zone\s+${dst_zone}\s+src-address\s+${src_address} -> Record
+  ^security-policy\s+${name}\s+src-zone\s+${src_zone}\s+dst-zone\s+${dst_zone}\s+dst-address\s+${dst_address} -> Record
+  ^security-policy\s+${name}\s+src-zone\s+${src_zone}\s+dst-zone\s+${dst_zone}\s+service\s+service-object\s+${service_protocol} -> Record
+  ^security-policy\s+${name}\s+src-zone\s+${src_zone}\s+dst-zone\s+${dst_zone}\s+service\s+service-group\s+${service_protocol_name} -> Record
+  ^security-policy\s+${name}\s+src-zone\s+${src_zone}\s+dst-zone\s+${dst_zone}\s+service\s+${service_protocol} -> Record
+  ^security-policy\s+${name}\s+src-zone\s+${src_zone}\s+dst-zone\s+${dst_zone}\s+state\s+${state} -> Record
+  ^security-policy\s+${name}(\s+src-zone\s+${src_zone})?(\s+dst-zone\s+${dst_zone})?\s+description\s+${description}$$ -> Record  
+  ^security-policy\s+${name}\s+src-zone\s+${src_zone} -> Record
+  ^security-policy\s+${name}\s+dst-zone\s+${dst_zone} -> Record
+  ^security-policy\s+${name}\s+src-address\s+address-object\s+${src_addr_obj}$$ -> Record
+  ^security-policy\s+${name}\s+dst-address\s+address-object\s+${dst_addr_obj}$$ -> Record
+  ^security-policy\s+${name}\s+src-address\s+address-group\s+${src_addr_grp}$$ -> Record
+  ^security-policy\s+${name}\s+dst-address\s+address-group\s+${dst_addr_grp}$$ -> Record  
+  ^security-policy\s+${name}\s+src-address\s+${src_address} -> Record
+  ^security-policy\s+${name}\s+dst-address\s+${dst_address} -> Record
+  ^security-policy\s+${name}\s+service\s+service-object\s+${service_protocol} -> Record
+  ^security-policy\s+${name}\s+service\s+service-group\s+${service_protocol_name} -> Record
+  ^security-policy\s+${name}\s+action\s+${action} -> Record
+  ^security-policy\s+${name}\s+time-object\s+${time_obj} -> Record
+  ^security-policy\s+${name}\s+state\s+${state} -> Record

@@ -1,9 +1,0 @@
-Value VPN_NAME (\S+)
-Value RD (\d+:\d+)
-Value ADDRESS_FAMILY (IPv4|IPv6)
-
-Start
-  ^\s*Total VPN-Instances configured : \d+
-  ^\s*VPN-Instance Name\s+RD\s+Create time -> Next
-  ^\s*${VPN_NAME}\s+(${RD}\s+)?${ADDRESS_FAMILY} -> Record
-  ^\s*$$

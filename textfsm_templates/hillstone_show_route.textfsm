@@ -1,0 +1,21 @@
+Value Filldown VRF (\S+)
+Value PROTOCOL ([A-Z])
+Value Required NETWORK (\d+\.\d+\.\d+\.\d+/\d+)
+Value PRIORITY (\d+)
+Value METRIC (\d+)
+Value WEIGHT (\d+)
+Value NEXTHOP (\d+\.\d+\.\d+\.\d+)
+Value ROUTE_TYPE (directly connected|directly connnected|local address)
+Value INTERFACE (\S+)
+Value STATUS (inactive)
+Value DESCRIPTION ([^"]+)
+
+Start
+  ^Routing\s+Table\s+for\s+Virtual\s+Router\s+<${VRF}> -> Continue
+  ^=+.* -> Continue
+  ^Codes:.* -> Continue
+  ^${PROTOCOL}\S*\s+${NETWORK}\s+\[${PRIORITY}/${METRIC}/${WEIGHT}\]\s+via\s+${NEXTHOP},\s+${INTERFACE},\s+"${DESCRIPTION}" -> Record
+  ^${PROTOCOL}\S*\s+${NETWORK}\s+\[${PRIORITY}/${METRIC}/${WEIGHT}\]\s+via\s+${NEXTHOP},\s+${INTERFACE} -> Record
+  ^${PROTOCOL}\S*\s+${NETWORK}\s+\[${PRIORITY}/${METRIC}/${WEIGHT}\]\s+via\s+${NEXTHOP}\s+${STATUS} -> Record
+  ^${PROTOCOL}\S*\s+${NETWORK}\s+\[${PRIORITY}/${METRIC}/${WEIGHT}\]\s+is\s+${ROUTE_TYPE},\s+${INTERFACE} -> Record
+  ^${PROTOCOL}\S*\s+${NETWORK}\s+is\s+${ROUTE_TYPE},\s+${INTERFACE} -> Record

@@ -1,0 +1,11 @@
+Value Required name (\S+)
+Value expiration_type (absolute|periodic)
+Value cycle_list (.*)
+Value expiration_start (\d+:\d+:\d+(\s\d+\-\d+\-\d+)?)
+Value expiration_end (\d+:\d+:\d+(\s\d+\-\d+\-\d+)?)
+Value description (\S+)
+
+Start
+  ^\s*time-object\s+${name}\s+${expiration_type}\s+start\s+${expiration_start}\s+end\s+${expiration_end} -> Record
+  ^\s*time-object\s+${name}\s+${expiration_type}\s+${cycle_list}\s+${expiration_start}\s+to\s+${expiration_end} -> Record
+  ^\s*time-object\s+${name}\s+${cycle_list} -> Record

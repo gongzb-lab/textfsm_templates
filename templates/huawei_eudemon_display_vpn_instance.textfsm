@@ -1,9 +1,0 @@
-Value VPN_NAME (\S+)
-Value RD (\d+:\d+)
-Value CREATE_TIME (\d{4}/\d{2}/\d{2} \d{2}:\d{2}:\d{2})
-
-Start
-  ^\s*Total VPN-Instances configured : \d+
-  ^\s*VPN-Instance Name\s+RD\s+Create time -> Next
-  ^\s*${VPN_NAME}\s+(${RD}\s+)?${CREATE_TIME} -> Record
-  ^\s*$$

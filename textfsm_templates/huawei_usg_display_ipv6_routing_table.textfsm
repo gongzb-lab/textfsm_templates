@@ -1,0 +1,20 @@
+Value Filldown NETWORK ([0-9A-Fa-f:]+::\d*|[0-9A-Fa-f:]+\d*)
+Value Filldown PREFIX_LENGTH (\d+)
+Value Filldown NEXTHOP_IP ([0-9A-Fa-f:]+|::)
+Value Filldown PREFERENCE (\d+)
+Value Filldown COST (\d+)
+Value Filldown PROTOCOL (\S+)
+Value Filldown RELAY_NEXTHOP ([0-9A-Fa-f:]+|::)
+Value Filldown TUNNEL_ID (\S+)
+Value INTERFACE (\S+)
+Value FLAGS (\S+)
+
+Start
+  ^\s*Destination\s*: -> Continue.Record
+  ^\s*Destinations\s+:\s+\d+\s+Routes\s+:\s+\d+\s+
+  ^\s*Destination\s*:\s+${NETWORK}\s+PrefixLength\s*:\s+${PREFIX_LENGTH}\s*$$
+  ^\s*NextHop\s+:\s+${NEXTHOP_IP}\s+Preference\s*:\s+${PREFERENCE}\s*$$
+  ^\s*Cost\s+:\s+${COST}\s+Protocol\s+:\s+${PROTOCOL}\s*$$
+  ^\s*RelayNextHop\s+:\s+${RELAY_NEXTHOP}\s+TunnelID\s+:\s+${TUNNEL_ID}\s*$$
+  ^\s*Interface\s+:\s+${INTERFACE}\s+Flags\s+:\s+${FLAGS}\s*$$
+  ^\s*$$
