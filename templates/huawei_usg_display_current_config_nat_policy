@@ -1,5 +1,5 @@
-Value Required NAME (\S+)
-Value DESCRIPTION (\S.*\S)
+Value Required NAME (\S.*?)
+Value DESCRIPTION (\S.*?)
 Value TRANSLATION_SOURCE_OBJECT (easy-ip|\S.*\S)
 Value STATIC_MODE (address-to-address|address-to-port|port-to-address|port-to-port)
 Value TRANSLATION_DESTINATION_ADDRESS (\d+\.\d+\.\d+\.\d+)

@@ -1,4 +1,4 @@
-Value Required NAME (\S+)
+Value Required NAME (\S.*?)
 Value STATUS (Active|Inactive)
 Value List PERIODIC_START (\d{1,2}:\d{1,2}(?::\d{1,2})?)
 Value List PERIODIC_END (\d{1,2}:\d{1,2}(?::\d{1,2})?)

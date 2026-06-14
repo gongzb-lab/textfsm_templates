@@ -1,18 +1,9 @@
-Value Required,Filldown NAME (\S+)
-Value Filldown TYPE (\S+)
-Value Filldown DESCRIPTION (.*)
-Value Filldown ITEMS (\d+)
-Value Filldown REFERENCE (\d+)
-Value List INDEX (\d+)
-Value List ADDRESS (.+)
+Value VPN_NAME (\S+)
+Value RD (\d+:\d+)
+Value CREATE_TIME (\d{4}/\d{2}/\d{2} \d{2}:\d{2}:\d{2})
 
 Start
-  ^Address-set: -> Continue.Record
-  ^Address-set:\s+${NAME} 
-  ^Type:\s+${TYPE}
-  ^Description:\s+${DESCRIPTION}
-  ^Item number\(s\):\s+${ITEMS}
-  ^Reference number\(s\):\s+${REFERENCE}
-  ^\s+address\s+${INDEX}\s+${ADDRESS}
-  ^Address-set:\s+${NAME} -> Record Start
+  ^\s*Total VPN-Instances configured : \d+
+  ^\s*VPN-Instance Name\s+RD\s+Create time -> Next
+  ^\s*${VPN_NAME}\s+(${RD}\s+)?${CREATE_TIME} -> Record
   ^\s*$$

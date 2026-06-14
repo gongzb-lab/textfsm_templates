@@ -1,7 +1,7 @@
 Value ZONE_NAME (\S+)
-Value DESCRIPTION (.*)
+Value DESCRIPTION (\S.*?)
 Value Required PRIORITY (\d+)
-Value List INTERFACE ([A-Za-z]+[\d\/]+)
+Value List INTERFACE ([A-Za-z-]+\s*\d+(?:\/\d+)*(?:\.\d+)?)
 Value VRF (\S+)
 
 Start

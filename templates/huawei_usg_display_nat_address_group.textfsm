@@ -1,4 +1,4 @@
-Value Filldown,Required NAME (\S+)
+Value Filldown,Required NAME (\S.*?)
 Value Filldown,Required ID (\d+)
 Value Filldown REFERENCE_COUNT (\d+)
 Value Filldown MODE (\S+)

@@ -1,10 +1,10 @@
-Value Filldown NAME (\S+)
-Value Required ENTRY (.+)
+Value Filldown NAME (\S.*?)
+Value Filldown DESCRIPTION (\S.*\S)
+Value List DOMAIN (\S+)
 
 Start
-  # 匹配 Domain-set 头部，例如: domain-set name test
-  ^\s*domain-set name ${NAME}
-  # 匹配: add domain test1.com
-  ^\s*add domain ${ENTRY} -> Record
-  # 遇到 # 号返回开始状态
+  ^\s*domain-set\s+name -> Continue.Record
+  ^\s*domain-set\s+name ${NAME}
+  ^\s*description\s+${DESCRIPTION}
+  ^\s*add\s+domain\s+${DOMAIN}
   ^# -> Start
