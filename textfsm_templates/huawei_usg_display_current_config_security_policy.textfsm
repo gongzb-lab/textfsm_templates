@@ -1,15 +1,76 @@
-Value RULE_NAME (\S+)
-Value POLICY (\S+)
-Value SESSION (\S+)
-Value SOURCE_ZONE (\S+)
-Value DESTINATION_ZONE (\S+)
-Value ACTION (\S+)
+Value RULE_NAME (.+?)
+Value ACTION (permit|deny|reset|reject)
+Value STATUS (enable|disable)
+Value LOG_POLICY (enable|disable)
+Value LOG_SESSION (enable|disable)
+Value COUNTING (enable|disable)
+Value VRF (\S+)
+Value TIME_RANGE (.+?)
+Value DESCRIPTION (.+?)
+Value List SOURCE_ZONE (.+?)
+Value List DESTINATION_ZONE (\S+)
+Value List SOURCE_ADDRESS (.+?)
+Value List SOURCE_OBJECT (.+?)
+Value List SOURCE_DOMAIN (.+?)
+Value List DESTINATION_ADDRESS (.+?)
+Value List DESTINATION_OBJECT (.+?)
+Value List DESTINATION_DOMAIN (.+?)
+Value List SERVICE_OBJECT (.+?)
+Value List SERVICE (.+?)
+Value List PROFILE (.+?)
+Value List TAG (.+?)
+Value List VLAN_ID (\d+)
+Value List USER_GROUP (.+?)
+Value List APPLICATION (\S+)
+Value List URL_CATEGORY (\S+)
 
 Start
-  ^\srule name -> Continue.Record
-  ^\s*rule name ${RULE_NAME}
-  ^\s*policy ${POLICY}
-  ^\s*session ${SESSION}
-  ^\s*source-zone ${SOURCE_ZONE}
-  ^\s*destination-zone ${DESTINATION_ZONE}
-  ^\s*action ${ACTION}
+  ^\s*rule\s+name -> Continue.Record
+  ^\s*rule\s+name\s+${RULE_NAME}$$
+  ^\s+action\s+${ACTION}$$
+  ^\s+${STATUS}$$
+  ^\s+policy\s+logging\s+${LOG_POLICY}$$
+  ^\s+session\s+logging\s+${LOG_SESSION}$$
+  # 匹配计数
+  ^\s+counting\s+${COUNTING}$$
+  # 匹配VRF
+  ^\s+vrf\s+${VRF}$$
+  # 匹配时间范围
+  ^\s+time-range\s+${TIME_RANGE}$$
+  # 匹配描述
+  ^\s+description\s+${DESCRIPTION}$$
+  # 匹配源区域 (注意：华为允许一行多个区域，用空格分隔，这里捕获整行)
+  ^\s+source-zone\s+${SOURCE_ZONE}$$
+  # 匹配目的区域
+  ^\s+destination-zone\s+${DESTINATION_ZONE}$$
+  # 匹配源地址
+  # 格式: source-address address-set xxx
+  # 格式: source-address 1.1.1.1 mask 255.255.255.255
+  # 格式: source-address 12::2 64
+  # 格式: source-address range 1.1.1.1 2.2.2.2
+  # 格式: source-address domain-set xxx
+  ^\s+source-address\s+address-set\s+${SOURCE_OBJECT}$$
+  ^\s+source-address\s+domain-set\s+${SOURCE_DOMAIN}$$ 
+  ^\s+source-address\s+${SOURCE_ADDRESS}$$ 
+  # 匹配目的地址
+  ^\s+destination-address\s+address-set\s+${DESTINATION_OBJECT}$$ 
+  ^\s+destination-address\s+domain-set\s+${DESTINATION_DOMAIN}$$ 
+  ^\s+destination-address\s+${DESTINATION_ADDRESS}$$
+  # 匹配服务
+  # 格式: service TCP_80
+  # 格式: service protocol tcp destination-port 80
+  # 格式: service http
+  ^\s+service\s+protocol\s+${SERVICE}$$
+  ^\s+service\s+${SERVICE_OBJECT}$$
+  # 匹配应用识别
+  ^\s+application\s+category\s+${APPLICATION}$$ 
+  # 匹配URL分类
+  ^\s+url\s+pre-defined\s+category\s+${URL_CATEGORY}$$ 
+  # 匹配用户组
+  ^\s+user\s+${USER_GROUP}$$ 
+  # 匹配VLAN
+  ^\s+vlan-id\s+${VLAN_ID}$$ 
+  # 匹配标签
+  ^\s+add\s+tag\s+${TAG}$$ 
+  # 匹配安全配置文件 (AV, IPS, URL Filter等)
+  ^\s+profile\s+${PROFILE}$$
