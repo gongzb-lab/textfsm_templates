@@ -1,0 +1,34 @@
+h3c_secpath_current_config_object_group_service_template_rules = [
+    # object-group service
+    re.compile(
+        r'^object-group\s+service\s+'
+        r'(?P<group_name>\S.*?)$'
+    ),
+    # service tcp/udp source/destination
+    re.compile(
+        r'^\s+(?P<object_id>\d+)\s+service\s+'
+        r'(?P<object_server_protocol>tcp|udp|icmp|icmpv6|\d+)'
+        r'(?:\s+source\s+'
+        r'(?P<object_server_src_operator>eq|range|gt|lt)\s+'
+        r'(?P<object_server_src_port_range>\S+(?:\s+\S+)?))?'
+        r'(?:\s+destination\s+'
+        r'(?P<object_server_dst_operator>eq|range|gt|lt)\s+'
+        r'(?P<object_server_dst_port_range>\S+(?:\s+\S+)?))?$'
+    ),
+    # service tcp/udp 80
+    re.compile(
+        r'^\s+(?P<object_id>\d+)\s+service\s+'
+        r'(?P<object_server_protocol>tcp|udp|icmp|icmpv6|\d+)\s+'
+        r'(?P<object_server_dst_port_range>\S+(?:\s+\S+)?)$'
+    ),
+    # group-object
+    re.compile(
+        r'^\s+(?P<object_id>\d+)\s+service\s+group-object\s+'
+        r'(?P<object_name>\S+)$'
+    ),
+    # description
+    re.compile(
+        r'^\s+description\s+'
+        r'(?P<description>.+)$'
+    ),
+]

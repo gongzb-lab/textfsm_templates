@@ -1,0 +1,21 @@
+Value Filldown NAME (\S.*?)
+Value Filldown TYPE (object|group)
+Value Filldown ID (\d+)
+Value INDEX (\d+)
+Value OBJECT_NAME (\S.*?)
+Value PROTOCOL (tcp|udp|icmp|icmpv6|sctp|\d+)
+Value SRC_PORT (\d+(?:\s+\d+)*(?:\s+to\s+\d+)?)
+Value DST_PORT (\d+(?:\s+\d+)*(?:\s+to\s+\d+)?)
+Value ICMP_TYPE (\S+)
+Value ICMP_CODE (\d+)
+
+Start
+  ^#$$
+  ^ip\s+service-set\s+${NAME}\s+type\s+${TYPE}\s+${ID} -> Service
+
+Service
+  ^\s*service\s+${INDEX}\s+service-set\s+${OBJECT_NAME}\s*$$ -> Record
+  ^\s*service\s+${INDEX}\s+protocol\s+${PROTOCOL}(\s+source-port\s+${SRC_PORT})?(\s+destination-port\s+${DST_PORT})?\s*$$ -> Record
+  ^\s*service\s+${INDEX}\s+protocol\s+${PROTOCOL}\s+(icmp-type|icmpv6-type)\s+${ICMP_TYPE}(\s+${ICMP_CODE})?\s*$$ -> Record
+  ^ip\s+service-set\s+${NAME}\s+type\s+${TYPE}\s+${ID} -> Service
+  ^#$$ -> Start
