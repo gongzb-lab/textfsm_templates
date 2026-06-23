@@ -1,0 +1,33 @@
+h3c_secpath_current_config_object_group_network_template_rules = [
+    # object-group
+    re.compile(
+        r'^object-group\s+'
+        r'(?P<ip_version>ipv6|ip)\s+'
+        r'address\s+'
+        r'(?P<group_name>\S.*?)$'
+    ),
+    # network host/subnet/range
+    re.compile(
+        r'^\s+(?P<object_id>\d+)\s+network\s+'
+        r'(?P<object_network_type>host\s+address|range|subnet)'
+        r'\s+'
+        r'(?P<object_network_address>\S+(?:\s+\S+)?)$'
+    ),
+    # network host name
+    re.compile(
+        r'^\s+(?P<object_id>\d+)\s+network\s+'
+        r'(?P<object_network_type>host\s+name)\s+'
+        r'(?P<object_network_domain>\S+)'
+        r'(?:\s+vpn-instance\s+(?P<vrf>\S+))?$'
+    ),
+    # group-object
+    re.compile(
+        r'^\s+(?P<object_id>\d+)\s+network\s+group-object\s+'
+        r'(?P<object_name>\S.*?)$'
+    ),
+    # description
+    re.compile(
+        r'^\s+description\s+'
+        r'(?P<description>\S.*?)$'
+    ),
+]
