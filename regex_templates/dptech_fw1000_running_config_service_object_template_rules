@@ -1,0 +1,40 @@
+        dptech_fw1000_running_config_service_object_template_rules = [
+            # TCP / UDP / SCTP
+            re.compile(
+                r'^service-object\s+'
+                r'(?P<object_name>.+?)\s+'
+                r'protocol\s+'
+                r'(?P<protocol>tcp|udp|sctp)'
+                r'(?:\s+src-port\s+(?P<src_port>\S+(?:\s+to\s+\S+)?))?'
+                r'(?:\s+dst-port\s+(?P<dst_port>\S+(?:\s+to\s+\S+)?))?'
+                r'$'
+            ),
+
+            # ICMP
+            re.compile(
+                r'^service-object\s+'
+                r'(?P<object_name>.+?)\s+'
+                r'protocol\s+icmp'
+                r'(?:\s+type\s+(?P<icmp_type>\S+(?:\s+to\s+\S+)?))?'
+                r'(?:\s+code\s+(?P<icmp_code>\S+(?:\s+to\s+\S+)?))?'
+                r'$'
+            ),
+
+            # 其他协议 / 协议号
+            re.compile(
+                r'^service-object\s+'
+                r'(?P<object_name>.+?)\s+'
+                r'protocol\s+'
+                r'(?P<protocol>\S+)'
+                r'$'
+            ),
+
+            # description
+            re.compile(
+                r'^service-object\s+'
+                r'(?P<object_name>.+?)\s+'
+                r'description\s+'
+                r'(?P<description>.+)'
+                r'$'
+            ),
+        ]

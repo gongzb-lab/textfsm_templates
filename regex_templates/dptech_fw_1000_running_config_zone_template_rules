@@ -1,0 +1,30 @@
+dptech_fw1000_running_config_zone_template_rules = [
+    # security-zone Trust priority 85
+    re.compile(
+        r'^security-zone\s+'
+        r'(?P<zone_name>\S+)\s+'
+        r'priority\s+'
+        r'(?P<priority>\d+)$'
+    ),
+    # security-zone DMZ interface gige0_18
+    re.compile(
+        r'^security-zone\s+'
+        r'(?P<zone_name>\S+)\s+'
+        r'interface\s+'
+        r'(?P<interface>\S+)$'
+    ),
+    # security-zone Untrust inner-zone-action deny
+    re.compile(
+        r'^security-zone\s+'
+        r'(?P<zone_name>\S+)\s+'
+        r'inner-zone-action\s+'
+        r'(?P<action>deny|permit)$'
+    ),
+    # security-zone xxx description xxx
+    re.compile(
+        r'^security-zone\s+'
+        r'(?P<zone_name>\S+)\s+'
+        r'description\s+'
+        r'(?P<description>\S+.*)$'
+    ),
+]

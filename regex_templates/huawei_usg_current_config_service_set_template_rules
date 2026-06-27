@@ -1,0 +1,40 @@
+huawei_usg_current_config_service_set_template_rules = [
+    # service-set
+    re.compile(
+        r'^ip\s+service-set\s+(?P<NAME>\S.*?)\s+type\s+(?P<TYPE>object|group)\s+(?P<ID>\d+)$'
+    ),
+    # service service-set
+    re.compile(
+        r'^\s+service\s+(?P<INDEX>\d+)\s+service-set\s+(?P<OBJECT_NAME>\S.*?)\s*$'
+    ),
+    # service tcp/udp/sctp
+    re.compile(
+        r'''^\s+service\s+
+        (?P<INDEX>\d+)\s+
+        protocol\s+
+        (?P<PROTOCOL>tcp|udp|sctp|\d+)
+        (?:\s+source-port\s+(?P<SRC_PORT>\d+(?:\s+\d+)*(?:\s+to\s+\d+)?))?
+        (?:\s+destination-port\s+(?P<DST_PORT>\d+(?:\s+\d+)*(?:\s+to\s+\d+)?))?
+        \s*$''',
+        re.X
+    ),
+    # service icmp
+    re.compile(
+        r'''^\s+service\s+
+        (?P<INDEX>\d+)\s+
+        protocol\s+
+        (?P<PROTOCOL>icmp|icmpv6)\s+
+        (?:icmp-type|icmpv6-type)\s+
+        (?P<ICMP_TYPE>\S+)
+        (?:\s+(?P<ICMP_CODE>\d+))?
+        \s*$''',
+        re.X
+    ),
+    # description xxxx
+    re.compile(
+        r'''^\s+description\s+
+        (?P<DESCRIPTION>.+?)
+        \s*$''',
+        re.X
+    ),
+]

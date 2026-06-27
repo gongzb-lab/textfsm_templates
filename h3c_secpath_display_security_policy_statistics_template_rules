@@ -1,8 +1,0 @@
-h3c_secpath_display_security_policy_statistics_template_rules = [
-    ('RULE', re.compile(
-        r'^\s+rule\s+(?P<RULE_ID>\d+)\s+name\s+(?P<RULE_NAME>[^(]+)(?:\s+\((?P<STATUS>Inactive|Active)\))?'
-    )),
-    ('ACTION', re.compile(
-        r'^\s+action:?\s+(?P<ACTION>pass|drop)(?:\s+\((?P<PACKETS>\d+)\s+packets,\s+(?P<BYTES>\d+)\s+bytes\))?$'
-    )),
-]
