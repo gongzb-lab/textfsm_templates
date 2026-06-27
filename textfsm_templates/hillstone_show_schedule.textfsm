@@ -1,5 +1,5 @@
-Value Required NAME (.+?)
-Value STATUS (active|inactive)
+Value Required NAME (\S(?:.*\S)?)
+Value STATUS (\S+)
 Value List TIME_TYPE (absolute|periodic)
 Value List PERIODIC_START (\d+:\d+:\d+|\d+:\d+)
 Value List PERIODIC_END (\d+:\d+:\d+|\d+:\d+)

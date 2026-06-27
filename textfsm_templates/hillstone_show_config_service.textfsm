@@ -1,0 +1,15 @@
+Value Filldown SERVICE_NAME (\S(?:.*\S)?)
+Value Filldown DESCRIPTION (\S(?:.*\S)?)
+Value PROTOCOL (\S+)
+Value DST_PORT ((?:\d+\s*)+)
+Value SRC_PORT ((?:\d+\s*)+)
+Value ICMP_TYPE (\d+)
+Value ICMP_CODE ((?:\d+\s*)+)
+
+Start
+  ^service -> Continue.Record
+  ^service\s+"${SERVICE_NAME}"
+  ^\s+description\s+${DESCRIPTION}$$
+  ^\s+${PROTOCOL}\s+dst-port\s+${DST_PORT}(\s+src-port\s+${SRC_PORT})?$$ -> Record
+  ^\s+${PROTOCOL}\s+type\s+${ICMP_TYPE}(\s+code\s+${ICMP_CODE})?$$ -> Record
+  ^\s+protocol\s+${PROTOCOL}$$ -> Record

@@ -1,8 +1,9 @@
-Value Filldown NAME (.+?)
+Value Filldown NAME (\S(?:.*\S)?)
 Value List IP (\d+\.\d+\.\d+\.\d+/\d+|[0-9a-fA-F:]+/\d+)
 Value List RANGE ((\d+\.\d+\.\d+\.\d+)\s+(\d+\.\d+\.\d+\.\d+))
 Value List WILDCARD ((\d+\.\d+\.\d+\.\d+)\s+(\d+\.\d+\.\d+\.\d+))
 Value List HOST ("[^"]+"|\S+)
+Value List VR ("[^"]+"|\S+)
 Value List MEMBER ("[^"]*"|\S+)
 Value DESCRIPTION ("[^"]+"|\S+)
 
@@ -11,7 +12,7 @@ Start
   ^address\s+"${NAME}".*$$
   ^\s+ip\s+${IP}$$
   ^\s+range\s+${RANGE}$$
-  ^\s+host\s+"${HOST}"$$
+  ^\s+host\s+"${HOST}"(\s+vr\s+"${VR}")?$$
   ^\s+wildcard\s+${WILDCARD}$$
   ^\s+member\s+"${MEMBER}"$$
   ^\s+description\s+"${DESCRIPTION}"$$
