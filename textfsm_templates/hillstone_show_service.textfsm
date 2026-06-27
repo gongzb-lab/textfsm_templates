@@ -1,6 +1,6 @@
-Value Required,Filldown SERVICE_NAME (.+?)
+Value Required,Filldown SERVICE_NAME (\S(?:.*\S)?)
 Value Required PROTOCOL (Any|TCP|UDP|ICMP|IPv6-ICMP|GRE|ESP|AH|IPv4|IPv6|OSPFIGP|IP)
-Value DST_PORT (\S+|-)
+Value DST_PORT (\S+)
 Value SRC_PORT (\S+|-)
 Value TIMEOUT (-)
 
